@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="system" method="upgrade">
+<name>Keypic Toobar Button</name>
+<author>Techjoomla</author>
+<creationDate>28/08/2014</creationDate>
+<copyright>Techjoomla. All rights reserved.</copyright>
+<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+<authorEmail>extensions@techjoomla.com</authorEmail>
+<authorUrl>www.techjoomla.com</authorUrl>
+<version>1.0.0</version>
+<description>This plugin shows new button in toolbar on User Manager to report any user as spam</description>
+	<files>
+		<filename plugin="keypic">keypic.php</filename>
+		<filename>index.html</filename>
+		<folder>controllers</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_system_keypic.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_system_keypic.sys.ini</language>
+	</languages>
+	<scriptfile>script.php</scriptfile>
+</extension>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="captcha" method="upgrade">
+	<name>Keypic Registration Page</name>
+	<author>Techjoomla</author>
+	<creationDate>28/08/2014</creationDate>
+	<copyright>Techjoomla. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<version>1.0.0</version>
+	<description><![CDATA[
+	<p>For many people, Keypic is quite possibly the best way in the world to protect your blog from comment and trackback spam.</p>
+	<p>It keeps your site protected from spam even while you sleep.</p>
+	<p>To get started:</p>
+	<p>1) Enable plugin to right side</p> 
+	<p>2) Sign up for a FormID here - <a target="_blank" href="https://keypic.com/?action=register">https://keypic.com/?action=register</a></p>
+	<p>3) Add FormID below</p>
+	]]></description>
+	<files>
+		<filename plugin="keypic">keypic.php</filename>
+		<filename>index.html</filename>
+		<folder>class</folder>
+		<folder>style</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_captcha_keypic.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_captcha_keypic.sys.ini</language>
+	</languages>
+	<scriptfile>script.php</scriptfile>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="formid" type="text" label="PLG_KEYPIC_FORM_LABEL"
+				description="PLG_KEYPIC_FORM_DESC" />
+				<field name="nospam" type="text" default="40" label="PLG_KEYPIC_NO_SPAM_LABEL"
+				description="PLG_KEYPIC_NO_SPAM_DESC" required="true" />
+				<field name="spam" type="text" default="70" label="PLG_KEYPIC_SPAM_LABEL"
+				description="PLG_KEYPIC_SPAM_DESC" required="true" />
+				<field name="button_type" type="list" default="336x280" label="PLG_KEYPIC_LOGO"
+				description="PLG_KEYPIC_LOGO_DESC" required="true">
+					<option value="1x1">Lead square transparent 1x1 pixel</option>
+					<option value="336x280">Large rectangle (336 x 280)</option>
+					<option value="300x250">Medium Rectangle (300 x 250)</option>
+					<option value="250x250">Square Pop-Up (250 x 250)</option>
+					<option value="240x400">Vertical Rectangle (240 x 400)</option>
+					<option value="180x150">Rectangle (180 x 150)</option>
+					<option value="300x100">3:1 Rectangle (300 x 100)</option>
+					<option value="720x300">Pop-under (720 x 300)</option>
+					<option value="392x72">Banner w/Naw Bar (392 x 72)</option>
+					<option value="468x60">Full Banner (468 x 60)</option>
+					<option value="234x60">Half Banner (234 x 60)</option>
+					<option value="80x15">Micro Button (80 x 15)</option>
+					<option value="88x31">Micro Bar (88 x 31)</option>
+					<option value="120x90">Button 1 (120 x 90)</option>
+					<option value="120x60">Button 2 (120 x 60)</option>
+					<option value="120x240">Vertical Banner (120 x 240)</option>
+					<option value="125x125">Square Button (125 x 125)</option>
+					<option value="728x90">Leaderboard (728 x 90)</option>
+					<option value="120x600">Skyscraper (120 x 600)</option>
+					<option value="160x600">Wide Skyscraper (160 x 600)</option>
+					<option value="300x600">Half Page Ad (300 x 600)</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
