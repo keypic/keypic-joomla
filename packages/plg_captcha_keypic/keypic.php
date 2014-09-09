@@ -25,11 +25,6 @@ class PlgCaptchaKeypic extends JPlugin
 		$this->loadLanguage();
 	}	
 
-	//Initialise Keypic
-	public function onInit($id = 'keypic_image')
-	{
-	}
-
 	//Display Keypic banner
 	public function onDisplay($name, $id = 'keypic_image', $class = '')
 	{
@@ -45,13 +40,15 @@ class PlgCaptchaKeypic extends JPlugin
 
 		else
 		{		
+			//Set form id to Keypic
+			Keypic::setFormID($this->params->get('formid'));
+			
 			//Ger banner size from param
 			$kepic_button_type = $this->params->get('button_type');
 			//Generate new token and keep it in hidden field
 			$image_token .= '<input type="hidden" name="'.$name.'" id="addtoken" value="'.Keypic::getToken('', '').'" />';
 			$image_token .= Keypic::getIt('getScript', $kepic_button_type);
 		}
-		
 		return $image_token;
 	}
 
@@ -76,7 +73,7 @@ class PlgCaptchaKeypic extends JPlugin
 		
 		//Get spam percentage from Keypic API
 		$percent = Keypic::isSpam( $formData->get('captcha','',''), $formData->get('email','',''));
-		
+
 		$input->set('percent', $percent, '');
 		
 		//Flag it as spam
