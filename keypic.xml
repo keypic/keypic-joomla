@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="system">
+	<name>Keypic SPAM Filter Plugin</name>
+	<author>Avik Das</author>
+	<creationDate>Oct 2012</creationDate>
+	<copyright>(C) 2010 - 2012 Keypic LLC All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>info@keypic.com</authorEmail>
+	<authorUrl>keypic.com</authorUrl>
+	<version>1.0.0</version>
+	<description><![CDATA[
+		<h4>Keypic SPAM Filter Plugin</h4>
+		<p><strong>Please add the lines in the following files to make it work.<strong></p>
+		<p>
+			/plugins/user/joomla/joomla.php - line no 113 within the function onUserAfterSave.<br/>
+			<pre>
+		$dispatcher =& JDispatcher::getInstance();
+		$dispatcher	= JDispatcher::getInstance();
+		JPluginHelper::importPlugin('system');
+		$dispatcher->trigger('onAfterStoreUser', array($user, $isnew, $success, $msg));
+			</pre>
+		</p>
+		<p>
+			/modules/mod_login/tmpl/default.php - line no 55<br/>
+			<pre>
+		&lt;?php
+			//include keypic validator 
+			$dispatcher	= JDispatcher::getInstance();
+			JPluginHelper::importPlugin('system');
+			$dispatcher->trigger('onRenderKeypicLoginFormValidator');
+		?&gt;
+			</pre>
+		</p>
+		<p>
+			/administrator/components/com_users/views/users/tmpl/default.php - line no 92<br/>
+			<pre>
+		&lt;th class="nowrap" width="3%"&gt;
+			&lt;?php echo JHtml::_('grid.sort', 'Spam(%)', 'a.spam_per', $listDirn, $listOrder); ?&gt;
+		&lt;/th&gt;
+			</pre>
+			
+			and line no 177<br/>
+			<pre>
+		&lt;td class="center"&gt;
+			&lt;?php if($item->spam_per>0): ?&gt;
+				&lt;a href="&lt;?php echo  JURI::root();?>plugins/system/keypic/report.php?token=&lt;?php echo $item->spam_token;?&gt;&id=&lt;?php echo (int) $item->id; ?&gt;"&gt;
+				Report SPAM &amp; Delete(&lt;?php echo $item->spam_per; ?&gt;%)&lt;/a&gt;
+			&lt;?php else:?&gt;
+				&nbsp;
+			&lt;?php endif; ?&gt;
+		&lt;/td&gt;
+			</pre>
+		</p>
+		]]>
+	</description>
+
+	<files>
+		<filename plugin="keypic">keypic.php</filename>
+		<filename plugin="keypic">report.php</filename>
+		<filename>index.html</filename>
+		<folder>keypic</folder>
+		<folder>admin</folder>
+		<folder>fields</folder>
+		<folder>helper</folder>
+	</files>
+	<install> 
+		<sql>
+			<file driver="mysql" charset="utf8">admin/sql/install.keypic.sql</file>
+		</sql>
+	</install>
+	<uninstall> 
+		<sql>
+			<file driver="mysql" charset="utf8">admin/sql/uninstall.keypic.sql</file>
+		</sql>
+	</uninstall>
+	<languages>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="plg_kepic_form_id" type="text"
+					label="Form ID"
+					description="Keypic Form ID" size="50">
+				</field>
+			</fieldset>
+			<fieldset name="keypic_login" label="In Login Form">
+				<field
+					name="plg_kepic_login_enable" type="list"
+					label="Enable"
+					description="Enable">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field
+					name="plg_kepic_login_button_type" type="list"
+					label="Keypic Logo"
+					description="Size &amp; Type of the Keypic logo">
+					<option value=""></option>
+					<option value="1x1">Lead square transparent 1x1 pixel</option>
+					<option value="336x280">Large rectangle (336 x 280)</option>
+					<option value="300x250">Medium Rectangle (300 x 250)</option>
+					<option value="250x250">Square Pop-Up (250 x 250)</option>
+					<option value="240x400">Vertical Rectangle (240 x 400)</option>
+					<option value="180x150">Rectangle (180 x 150)</option>
+					<option value="300x100">3:1 Rectangle (300 x 100)</option>
+					<option value="720x300">Pop-under (720 x 300)</option>
+					<option value="392x72">Banner w/Naw Bar (392 x 72)</option>
+					<option value="468x60">Full Banner (468 x 60)</option>
+					<option value="234x60">Half Banner (234 x 60)</option>
+					<option value="80x15">Micro Button (80 x 15)</option>
+					<option value="88x31" selected="selected">Micro Bar (88 x 31)</option>
+					<option value="120x90">Button 1 (120 x 90)</option>
+					<option value="120x60">Button 2 (120 x 60)</option>
+					<option value="120x240">Vertical Banner (120 x 240)</option>
+					<option value="125x125">Square Button (125 x 125)</option>
+					<option value="728x90">Leaderboard (728 x 90)</option>
+					<option value="120x600">Skyscraper (120 x 600)</option>
+					<option value="160x600">Wide Skyscraper (160 x 600)</option>
+					<option value="300x600">Half Page Ad (300 x 600)</option>
+				</field>
+				<field
+					name="plg_kepic_login_display_as" type="list"
+					label="Display as"
+					description="Display as Image or Iframe">
+					<option value="image">Image</option>
+					<option value="iframe">Iframe</option>
+				</field>
+				<field
+					name="plg_kepic_login_code" type="textarea"
+					label="Please add these lines above the login button (i.e. line no. 55) in &lt;br/&gt; /modules/mod_login/tmpl/default.php."
+					description="These will add the Keypic button in the form." cols="60" rows="10"
+					default="&lt;?php&#13;&#10;
+	//include keypic validator&#13;&#10;
+	$dispatcher	= JDispatcher::getInstance();&#13;&#10;
+	JPluginHelper::importPlugin('system');&#13;&#10;
+	$dispatcher->trigger('onRenderKeypicLoginFormValidator');&#13;&#10;
+?&gt;
+					" filter="raw">
+				</field>
+			</fieldset>
+			<fieldset name="keypic_registration" label="In Registration Form">
+				<field
+					name="plg_kepic_registration_enable" type="list"
+					label="Enable"
+					description="Enable">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field
+					name="plg_kepic_registration_button_type" type="list"
+					label="Keypic Logo"
+					description="Size &amp; Type of the Keypic logo">
+					<option value=""></option>
+					<option value="1x1">Lead square transparent 1x1 pixel</option>
+					<option value="336x280">Large rectangle (336 x 280)</option>
+					<option value="300x250">Medium Rectangle (300 x 250)</option>
+					<option value="250x250">Square Pop-Up (250 x 250)</option>
+					<option value="240x400">Vertical Rectangle (240 x 400)</option>
+					<option value="180x150">Rectangle (180 x 150)</option>
+					<option value="300x100">3:1 Rectangle (300 x 100)</option>
+					<option value="720x300">Pop-under (720 x 300)</option>
+					<option value="392x72">Banner w/Naw Bar (392 x 72)</option>
+					<option value="468x60">Full Banner (468 x 60)</option>
+					<option value="234x60">Half Banner (234 x 60)</option>
+					<option value="80x15">Micro Button (80 x 15)</option>
+					<option value="88x31" selected="selected">Micro Bar (88 x 31)</option>
+					<option value="120x90">Button 1 (120 x 90)</option>
+					<option value="120x60">Button 2 (120 x 60)</option>
+					<option value="120x240">Vertical Banner (120 x 240)</option>
+					<option value="125x125">Square Button (125 x 125)</option>
+					<option value="728x90">Leaderboard (728 x 90)</option>
+					<option value="120x600">Skyscraper (120 x 600)</option>
+					<option value="160x600">Wide Skyscraper (160 x 600)</option>
+					<option value="300x600">Half Page Ad (300 x 600)</option>
+				</field>
+				<field
+					name="plg_kepic_registration_display_as" type="list"
+					label="Display as"
+					description="Display as Image or Iframe">
+					<option value="image">Image</option>
+					<option value="iframe">Iframe</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
