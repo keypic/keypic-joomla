@@ -6,8 +6,8 @@
 <packagename>Keypic</packagename>
 <version>1.0.0</version>
 <packager>Techjoomla Team</packager>
-<description>Keypic is best replacement for captcha. User no need to check and enter difficult codes, its very easy with Keypic.
-Know more at keypic.com</description>
+<description>Keypic is the best replacement for captcha. User does not need to check and enter difficult codes, it’s very easy with Keypic.
+Learn more at keypic.com</description>
 <files folder="packages">
 	<file type="plugin" id="keypic" group="captcha">plg_captcha_keypic.zip</file>
 	<file type="plugin" id="keypic" group="user">plg_user_keypic.zip</file>
