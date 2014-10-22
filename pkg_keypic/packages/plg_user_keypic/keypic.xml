@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="user" method="upgrade">
+	<name>Keypic User Notes</name>
+	<author>Keypic</author>
+	<creationDate>28/08/2014</creationDate>
+	<copyright>Keypic. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>info@keypic.com</authorEmail>
+	<authorUrl>www.keypic.com</authorUrl>
+	<version>1.0.0</version>
+	<description>This plugin saves token and spam percentage for registered users.</description>
+	<files>
+		<filename plugin="keypic">keypic.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_user_keypic.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_user_keypic.sys.ini</language>
+	</languages>
+	<scriptfile>script.php</scriptfile>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="category" type="text"
+					default=""
+					description="PLG_USER_KEYPIC_CATEGORY_DESC"
+					label="PLG_USER_KEYPIC_CATEGORY"
+				>
+				</field>
+				<field name="userid" type="text"
+					default=""
+					description="PLG_USER_KEYPIC_USERID_DESC"
+					label="PLG_USER_KEYPIC_USERID"
+				>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

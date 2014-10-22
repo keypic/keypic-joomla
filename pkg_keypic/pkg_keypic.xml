@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="1.6" method="upgrade">
+<name>Antispam by Keypic</name>
+<author>Keypic, Inc.</author>
+<creationDate>28/08/2014</creationDate>
+<packagename>Keypic</packagename>
+<version>1.0.0</version>
+<packager>Keypic Team</packager>
+<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+<description>Keypic is the best replacement for captcha. User does not need to check and enter difficult codes, it’s very easy with Keypic.
+Learn more at keypic.com</description>
+<files folder="packages">
+	<file type="plugin" id="keypic" group="captcha">plg_captcha_keypic.zip</file>
+	<file type="plugin" id="keypic" group="user">plg_user_keypic.zip</file>
+	<file type="plugin" id="keypic" group="system">plg_system_keypic.zip</file>
+</files>
+</extension>	 
